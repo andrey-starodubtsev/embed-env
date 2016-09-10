@@ -22,3 +22,5 @@ RUN cpan -i \
 # RUN cpan -i \
 #       Term::ReadKey \
 #       Tk
+
+ENV TJ_ENV qa
