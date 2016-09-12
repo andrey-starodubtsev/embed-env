@@ -7,6 +7,7 @@ RUN apt-get update && \
       automake \
       build-essential \
       git \
+      libc6-i386 \
       tcl \
       wget
 
