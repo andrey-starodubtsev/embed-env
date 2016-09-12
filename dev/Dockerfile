@@ -25,4 +25,4 @@ RUN cd $HOME && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos arm-eabi && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
 
-ENV TJ_ENV dev
+ENV EMBED_ENV dev

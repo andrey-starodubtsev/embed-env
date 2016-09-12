@@ -2,7 +2,7 @@
 
 set -ex -o posix -o pipefail
 
-case TJ_ENV in
+case EMBED_ENV in
   dev)
     which arm-eabi-gcc
     arm-eabi-gcc --version
