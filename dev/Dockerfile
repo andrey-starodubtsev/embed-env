@@ -7,11 +7,14 @@ RUN apt-get update && \
       automake \
       build-essential \
       git \
+      lib32z1 \
       libc6-i386 \
       tcl \
       wget && \
     PERL_MM_USE_DEFAULT=1 cpan -i \
+      Crypt::RC4 \
       Data::Dump \
+      XML::Simple \
       boolean
 
 # despite http://ecos.sourceware.org/getstart.html says
