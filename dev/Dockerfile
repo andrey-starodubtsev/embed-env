@@ -9,7 +9,10 @@ RUN apt-get update && \
       git \
       libc6-i386 \
       tcl \
-      wget
+      wget && \
+    PERL_MM_USE_DEFAULT=1 cpan -i \
+      Data::Dump \
+      boolean
 
 # despite http://ecos.sourceware.org/getstart.html says
 # arm-elf toolchain is not available:

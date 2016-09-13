@@ -7,11 +7,11 @@ RUN apt-get update && \
       libdbd-mysql-perl \
       libnet-ssh2-perl \
       libxml-sax-expat-perl \
-      perl
-
-RUN cpan -i \
+      perl && \
+    PERL_MM_USE_DEFAULT=1 cpan -i \
       boolean \
       Crypt::RC4 \
+      Data::Dump \
       DBI \
       File::Which \
       JSON \
