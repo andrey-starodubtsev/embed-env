@@ -17,19 +17,11 @@ RUN apt-get update && \
       XML::Simple \
       boolean
 
-# despite http://ecos.sourceware.org/getstart.html says
-# arm-elf toolchain is not available:
-#
-# $ ./ecos-install.tcl $HOME/ecos arm-elf
-# [**************************************************]
-# Retrieving GNU tools for arm-elf
-#
-# *** ecos-install.tcl error: Tools for "arm-elf" not found
-
 RUN cd $HOME && \
     wget ftp://ecos.sourceware.org/pub/ecos/ecos-install.tcl && \
     chmod +x ecos-install.tcl && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos arm-eabi && \
+    ./ecos-install.tcl -m ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/ecos $HOME/ecos arm-elf && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
 
 ENV EMBED_ENV dev
