@@ -3,6 +3,7 @@ FROM ubuntu
 MAINTAINER Andrey Starodubtsev, https://github.com/andrey-starodubtsev
 
 RUN apt-get update && \
+    apt-get install -y apt-utils && \
     apt-get install -y \
       automake \
       build-essential \
@@ -20,8 +21,7 @@ RUN apt-get update && \
 RUN cd $HOME && \
     wget ftp://ecos.sourceware.org/pub/ecos/ecos-install.tcl && \
     chmod +x ecos-install.tcl && \
-    ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos arm-eabi && \
-    ./ecos-install.tcl -m ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/ecos $HOME/ecos arm-elf && \
+    ./ecos-install.tcl -m ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/ecos $HOME/ecos arm-eabi arm-elf && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
 
 ENV EMBED_ENV dev
