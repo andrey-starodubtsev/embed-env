@@ -10,6 +10,7 @@ RUN apt-get update && \
       git \
       lib32z1 \
       libc6-i386 \
+      libssl-dev \
       tcl \
       wget && \
     PERL_MM_USE_DEFAULT=1 cpan -i \
