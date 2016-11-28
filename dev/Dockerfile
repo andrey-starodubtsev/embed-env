@@ -7,17 +7,19 @@ RUN apt-get update && \
     apt-get install -y \
       automake \
       build-essential \
+      cpanminus \
       git \
       lib32z1 \
       libc6-i386 \
       libssl-dev \
       tcl \
       wget && \
-    PERL_MM_USE_DEFAULT=1 cpan -i \
+    cpanm \
       Crypt::RC4 \
       Data::Dump \
       XML::Simple \
-      boolean
+      boolean \
+      HTTP::Server::Simple
 
 # despite http://ecos.sourceware.org/getstart.html says
 # arm-elf toolchain is not available:
