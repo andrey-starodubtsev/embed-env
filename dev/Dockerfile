@@ -36,4 +36,6 @@ RUN cd $HOME && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos arm-eabi && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
 
+RUN echo "127.0.0.1 testbed" >> /etc/hosts
+
 ENV EMBED_ENV dev
