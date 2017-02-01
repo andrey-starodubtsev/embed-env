@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get install -y \
       automake \
       build-essential \
+      ca-cacert \
       git \
       lib32z1 \
       libc6-i386 \
@@ -18,14 +19,13 @@ RUN apt-get update && \
       libxml-simple-perl \
       tcl \
       valgrind \
-      wget
+      wget && \
+      update-ca-certificates
 
 RUN cd $HOME && \
     wget ftp://ecos.sourceware.org/pub/ecos/ecos-install.tcl && \
     chmod +x ecos-install.tcl && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos 'arm-elf (old)' arm-eabi && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
-
-RUN echo "127.0.0.1 testbed" >> /etc/hosts
 
 ENV EMBED_ENV dev
