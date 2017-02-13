@@ -17,6 +17,7 @@ RUN apt-get update && \
       libboolean-perl \
       libssl-dev \
       libxml-simple-perl \
+      sip-tester \
       tcl \
       valgrind \
       wget && \
