@@ -18,6 +18,7 @@ RUN apt-get update && \
       libssl-dev \
       libxml-simple-perl \
       libclone-perl \
+      sip-tester \
       tcl \
       valgrind \
       wget && \
