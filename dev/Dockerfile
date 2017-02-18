@@ -8,16 +8,18 @@ RUN apt-get update && \
       automake \
       build-essential \
       ca-cacert \
+      gcovr \
       git \
       lib32z1 \
+      libboolean-perl \
       libc6-i386 \
+      libclone-perl \
       libcrypt-rc4-perl \
       libdata-dump-perl \
       libhttp-server-simple-perl \
-      libboolean-perl \
+      libipc-system-simple-perl \
       libssl-dev \
       libxml-simple-perl \
-      libclone-perl \
       sip-tester \
       tcl \
       valgrind \
