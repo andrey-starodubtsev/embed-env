@@ -21,7 +21,7 @@ RUN cd $HOME && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos 'arm-elf (old)' arm-eabi && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
 
-RUN apt-get install -y
+RUN apt-get install -y \
       gcovr \
       git \
       libboolean-perl \
@@ -30,9 +30,18 @@ RUN apt-get install -y
       libdata-dump-perl \
       libhttp-server-simple-perl \
       libipc-system-simple-perl \
+      libnet-address-ip-local-perl \
       libproc-processtable-perl \
       libxml-simple-perl \
       sip-tester \
       valgrind
+
+# https://www.ivankrizsan.se/2015/08/08/creating-a-docker-image-with-ubuntu-and-java/
+RUN apt-get install -y  software-properties-common && \
+    add-apt-repository ppa:webupd8team/java -y && \
+    apt-get update && \
+    echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
+    apt-get install -y oracle-java7-installer && \
+    apt-get clean
 
 ENV EMBED_ENV dev
