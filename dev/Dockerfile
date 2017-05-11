@@ -31,6 +31,7 @@ RUN apt-get install -y \
       libhttp-server-simple-perl \
       libipc-system-simple-perl \
       libnet-address-ip-local-perl \
+      libproc-background-perl \
       libproc-processtable-perl \
       libxml-simple-perl \
       sip-tester \
