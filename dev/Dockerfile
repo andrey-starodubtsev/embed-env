@@ -21,19 +21,10 @@ RUN cd $HOME && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos 'arm-elf (old)' arm-eabi && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
 
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
       gcovr \
       git \
-      libboolean-perl \
-      libclone-perl \
-      libcrypt-rc4-perl \
-      libdata-dump-perl \
-      libhttp-server-simple-perl \
-      libipc-system-simple-perl \
-      libnet-address-ip-local-perl \
-      libproc-background-perl \
-      libproc-processtable-perl \
-      libxml-simple-perl \
       sip-tester \
       valgrind
 
@@ -47,5 +38,28 @@ RUN apt-get update && \
     apt-get clean
 
 RUN apt-get install -y lib32ncurses5
+
+RUN apt-get update && \
+    apt-get install -y \
+      libaudio-wav-perl \
+      libboolean-perl \
+      libclone-perl \
+      libcrypt-rc4-perl \
+      libdata-dump-perl \
+      libdate-calc-perl \
+      libfile-copy-recursive-perl \
+      libfile-which-perl \
+      libhttp-daemon-ssl-perl \
+      libhttp-server-simple-perl \
+      libipc-system-simple-perl \
+      libjson-perl \
+      libnet-address-ip-local-perl \
+      libnet-dns-perl \
+      libparse-syslog-perl \
+      libpath-class-perl \
+      libproc-background-perl \
+      libproc-processtable-perl \
+      libxml-simple-perl \
+      perl-tk
 
 ENV EMBED_ENV dev
