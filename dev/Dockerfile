@@ -59,6 +59,7 @@ RUN apt-get update && \
       libjson-perl \
       libnet-address-ip-local-perl \
       libnet-dns-perl \
+      libparse-netstat-perl \
       libparse-syslog-perl \
       libpath-class-perl \
       libproc-background-perl \
