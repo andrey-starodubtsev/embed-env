@@ -46,6 +46,8 @@ RUN apt-get install -y lib32ncurses5
 RUN apt-get update && \
     apt-get install -y \
       libaudio-wav-perl \
+      libauthen-simple-passwd-perl \
+      libauthen-simple-perl \
       libboolean-perl \
       libclone-perl \
       libcrypt-rc4-perl \
@@ -71,5 +73,12 @@ RUN apt-get update && \
     apt-get install -y \
       net-tools \
       tcpdump
+
+RUN git clone https://github.com/andrey-starodubtsev/HTTP-Server-Simple-Authen && \
+    cd HTTP-Server-Simple-Authen && \
+    perl Makefile.PL && \
+    make && \
+    make test && \
+    make install
 
 ENV EMBED_ENV dev
