@@ -63,6 +63,7 @@ RUN apt-get update && \
       libnet-dns-perl \
       libparse-netstat-perl \
       libparse-syslog-perl \
+      libpcap-dev \
       libpath-class-perl \
       libproc-background-perl \
       libproc-processtable-perl \
