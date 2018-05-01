@@ -2,14 +2,19 @@ FROM ubuntu
 
 MAINTAINER Andrey Starodubtsev, https://github.com/andrey-starodubtsev
 
-RUN apt-get update && \
+ENV TZ Europe/Moscow
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    apt-get update && \
     apt-get install -y apt-utils && \
     apt-get install -y \
       automake \
       build-essential \
       ca-cacert \
+      cmake \
       lib32z1 \
       libc6-i386 \
+      libcurl4-openssl-dev \
       libssl-dev \
       tcl \
       wget && \
