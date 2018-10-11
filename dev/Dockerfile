@@ -87,4 +87,6 @@ RUN git clone https://github.com/andrey-starodubtsev/HTTP-Server-Simple-Authen &
     make test && \
     make install
 
+RUN apt-get install -y clang
+
 ENV EMBED_ENV dev
