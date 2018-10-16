@@ -87,6 +87,7 @@ RUN git clone https://github.com/andrey-starodubtsev/HTTP-Server-Simple-Authen &
     make test && \
     make install
 
-RUN apt-get install -y clang
+RUN apt-get install -y clang llvm vim && \
+    ln -s /usr/lib/llvm-*/bin/llvm-symbolizer /usr/bin/
 
 ENV EMBED_ENV dev
