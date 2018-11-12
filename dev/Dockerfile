@@ -128,7 +128,11 @@ RUN apt-get update && \
       libxml-stream-perl
 
 RUN apt-get update && \
-    apt-get -y install imagemagick
+    apt-get -y install \
+      imagemagick \
+      cpanminus \
+    && \
+    cpanm Test::More
 
 # RUN yes | cpan -i Net::RTP::Packet
 
