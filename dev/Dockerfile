@@ -87,7 +87,49 @@ RUN git clone https://github.com/andrey-starodubtsev/HTTP-Server-Simple-Authen &
     make test && \
     make install
 
-RUN apt-get install -y clang llvm vim && \
+RUN apt-get update && \
+    apt-get install -y clang llvm vim && \
     ln -s /usr/lib/llvm-*/bin/llvm-symbolizer /usr/bin/
+
+# prereqs for perl-required-modules.pl
+RUN apt-get update && \
+    apt-get install -y \
+    apt-file \
+    libperl-prereqscanner-perl \
+    libmodule-path-perl \
+    libfile-next-perl && \
+    apt-file update
+
+RUN apt-get update && \
+    apt-get -y install \
+      libarchive-extract-perl \
+      libarchive-zip-perl \
+      libcapture-tiny-perl \
+      libdatetime-perl \
+      libdbd-mysql-perl \
+      libdbi-perl \
+      libdevice-modem-perl \
+      libenum-perl \
+      libfile-slurp-perl \
+      libio-async-perl \
+      liblog-any-perl \
+      liblog-dispatch-perl \
+      libmail-sender-perl \
+      libmodule-install-perl \
+      libmodule-build-perl \
+      libnet-dns-perl \
+      libnet-route-perl \
+      libnet-sftp-foreign-perl \
+      libnet-ssh2-perl \
+      libnet-telnet-perl \
+      libproc-background-perl \
+      libreadonly-perl \
+      liburi-perl \
+      libxml-stream-perl
+
+RUN apt-get update && \
+    apt-get -y install imagemagick
+
+# RUN yes | cpan -i Net::RTP::Packet
 
 ENV EMBED_ENV dev
