@@ -2,10 +2,14 @@ FROM ubuntu
 
 MAINTAINER Andrey Starodubtsev, https://github.com/andrey-starodubtsev
 
+ARG USER=me
+
 ENV TZ Europe/Moscow
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
-    apt-get update && \
+    sed -ie "s#^deb http#deb [arch=amd64,i386] http#" /etc/apt/sources.list && \
+    dpkg --add-architecture i386 && \
+    apt-get update -y && \
     apt-get install -y apt-utils && \
     apt-get install -y \
       automake \
@@ -20,14 +24,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
       wget && \
       update-ca-certificates
 
-RUN cd $HOME && \
-    wget ftp://ecos.sourceware.org/pub/ecos/ecos-install.tcl && \
-    chmod +x ecos-install.tcl && \
-    ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos 'arm-elf (old)' arm-eabi && \
-    echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
-
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get install -y \
       gcovr \
       git \
       sip-tester \
@@ -35,21 +32,18 @@ RUN apt-get update && \
 
 # FIXE: don't work at the moment
 # # https://www.ivankrizsan.se/2015/08/08/creating-a-docker-image-with-ubuntu-and-java/
-# RUN apt-get update && \
-#     apt-get install -y  software-properties-common && \
+# RUN apt-get install -y  software-properties-common && \
 #     add-apt-repository ppa:webupd8team/java -y && \
 #     apt-get update && \
 #     echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
 #     apt-get install -y oracle-java7-installer && \
 #     apt-get clean
 
-RUN apt-get update && \
-    apt-get install -y default-jre
+RUN apt-get install -y default-jre
 
-RUN apt-get install -y lib32ncurses5
+RUN apt-get install -y libncurses5:i386
 
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get install -y \
       libaudio-wav-perl \
       libauthen-simple-passwd-perl \
       libauthen-simple-perl \
@@ -75,8 +69,7 @@ RUN apt-get update && \
       libxml-simple-perl \
       perl-tk
 
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get install -y \
       net-tools \
       tcpdump
 
@@ -87,21 +80,19 @@ RUN git clone https://github.com/andrey-starodubtsev/HTTP-Server-Simple-Authen &
     make test && \
     make install
 
-RUN apt-get update && \
-    apt-get install -y clang llvm vim && \
-    ln -s /usr/lib/llvm-*/bin/llvm-symbolizer /usr/bin/
+RUN apt-get install -y clang llvm vim ninja-build
+
+    # ln -s /usr/lib/llvm-*/bin/llvm-symbolizer /usr/bin/
 
 # prereqs for perl-required-modules.pl
-RUN apt-get update && \
-    apt-get install -y \
-    apt-file \
-    libperl-prereqscanner-perl \
-    libmodule-path-perl \
-    libfile-next-perl && \
-    apt-file update
+RUN apt-get install -y \
+      apt-file \
+      libperl-prereqscanner-perl \
+      libmodule-path-perl \
+      libfile-next-perl && \
+      apt-file update
 
-RUN apt-get update && \
-    apt-get -y install \
+RUN apt-get -y install \
       libarchive-extract-perl \
       libarchive-zip-perl \
       libcapture-tiny-perl \
@@ -127,8 +118,7 @@ RUN apt-get update && \
       liburi-perl \
       libxml-stream-perl
 
-RUN apt-get update && \
-    apt-get -y install \
+RUN apt-get -y install \
       imagemagick \
       cpanminus \
     && \
@@ -136,4 +126,15 @@ RUN apt-get update && \
 
 # RUN yes | cpan -i Net::RTP::Packet
 
+RUN adduser --force-badname --home "/home/$USER" --uid 1000 "$USER" --disabled-password
+
+USER $USER
+ENV HOME /home/$USER
+WORKDIR $HOME
 ENV EMBED_ENV dev
+
+RUN cd $HOME && \
+    wget ftp://ecos.sourceware.org/pub/ecos/ecos-install.tcl && \
+    chmod +x ecos-install.tcl && \
+    ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos 'arm-elf (old)' arm-eabi && \
+    echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
