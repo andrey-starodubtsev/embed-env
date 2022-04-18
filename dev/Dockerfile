@@ -20,6 +20,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
       libc6-i386 \
       libcurl4-openssl-dev \
       libssl-dev \
+      libtool \
+      p7zip-full \
       tcl \
       wget && \
       update-ca-certificates
