@@ -2,7 +2,7 @@ FROM ubuntu
 
 MAINTAINER Andrey Starodubtsev, https://github.com/andrey-starodubtsev
 
-ARG USER=me
+# ARG USER=me
 
 ENV TZ Europe/Moscow
 
@@ -128,11 +128,11 @@ RUN apt-get -y install \
 
 # RUN yes | cpan -i Net::RTP::Packet
 
-RUN adduser --force-badname --home "/home/$USER" --uid 1000 "$USER" --disabled-password
+# RUN adduser --force-badname --home "/home/$USER" --uid 1000 "$USER" --disabled-password
 
-USER $USER
-ENV HOME /home/$USER
-WORKDIR $HOME
+# USER $USER
+# ENV HOME /home/$USER
+# WORKDIR $HOME
 ENV EMBED_ENV dev
 
 RUN cd $HOME && \
@@ -140,3 +140,5 @@ RUN cd $HOME && \
     chmod +x ecos-install.tcl && \
     ./ecos-install.tcl -m ftp://ecos.sourceware.org/pub/ecos $HOME/ecos 'arm-elf (old)' arm-eabi && \
     echo '. $HOME/ecos/ecosenv.sh' >> $HOME/.bashrc
+
+RUN git config --global --add safe.directory '*'
